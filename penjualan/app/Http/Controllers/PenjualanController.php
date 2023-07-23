@@ -46,24 +46,15 @@ class PenjualanController extends Controller
         'jenis_barang' => 'required',
     ]);
 
-    $input = $request->all();$penjualan = penjualan::create($input);
+    $data = Penjualan::create($request->all());
 
-        return redirect('/penjualan')->with('success', 'Data transaksi Berhasih ditambahkan.');
+    if ($data) {
+        // Get the updated data after inserting the new record
+        $data = Penjualan::all();
 
-    $result = DB::table('penjualan')->insert([
-        'nama_barang' => $request->input('nama_barang'),
-        'stok' => $request->input('stok'),
-        'jumlah_terjual' => $request->input('jumlah_terjual'),
-        'tanggal_transaksi' => $request->input('tanggal_transaksi'),
-        'jenis_barang' => $request->input('jenis_barang'),
-    ]);
-
-    
-
-    if ($result) {
-        return "Data berhasil ditambahkan.";
+        return view('welcome', compact('data'))->with('success', 'Data transaksi berhasil ditambahkan.');
     } else {
-        return "Gagal menambahkan data.";
+        return redirect('/penjualan')->with('error', 'Gagal menambahkan data transaksi.');
     }
 }
 

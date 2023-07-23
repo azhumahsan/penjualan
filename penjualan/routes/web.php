@@ -13,9 +13,8 @@
 
 use App\Http\Controllers\PenjualanController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PenjualanController@index');
+Route::resource('/penjualan', 'PenjualanController');
 
 Route::get('/penjualan', [PenjualanController::class, 'index'])->name('penjualan.index');
 Route::get('/penjualan/create', [PenjualanController::class, 'create'])->name('penjualan.create');
