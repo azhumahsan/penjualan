@@ -145,11 +145,7 @@
         <td>{{$items->jumlah_terjual}}</td>
         <td>{{$items->tanggal_transaksi}}</td>
         <td>{{$items->jenis_barang}}</td>
-        <td>
-          <button>Hapus</button>
-          <button>Lihat Detail</button>
-          <button>Edit</button>
-        </td>
+        
       </tr>
       @endforeach
     </table>

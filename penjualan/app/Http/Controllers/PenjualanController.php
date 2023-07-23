@@ -75,20 +75,16 @@ class PenjualanController extends Controller
      * @param  \App\Penjualan  $penjualan
      * @return \Illuminate\Http\Response
      */
-    public function edit(Penjualan $penjualan)
-    {
-        return view('edit_penjualan', compact('penjualan'));
-    }
+    public function edit($id)
+{
+    $penjualan = Penjualan::find($id);
+    return view('edit_penjualan', compact('penjualan'));
+}
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Penjualan  $penjualan
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Penjualan $penjualan)
+    public function update(Request $request, $id)
     {
+        $penjualan = Penjualan::findOrFail($id);
+
         $request->validate([
             'nama_barang' => 'required',
             'stok' => 'required|integer|min:0',
@@ -101,16 +97,15 @@ class PenjualanController extends Controller
 
         return redirect()->route('penjualan.index')->with('success', 'Data berhasil diupdate.');
     }
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Penjualan  $penjualan
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Penjualan $penjualan)
-    {
-        $penjualan->delete();
 
+    public function destroy($id)
+{
+    $penjualan = Penjualan::find($id);
+    if ($penjualan) {
+        $penjualan->delete();
         return redirect()->route('penjualan.index')->with('success', 'Data berhasil dihapus.');
+    } else {
+        return redirect()->route('penjualan.index')->with('error', 'Data tidak ditemukan.');
     }
+}
 }
