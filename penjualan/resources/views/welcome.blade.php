@@ -2,154 +2,165 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Data Penjualan</title>
-  <style>
-    body {
-     font-family: Arial, sans-serif;
-     background-color: #f2f2f2;
-     margin: 0;
-     padding: 0;
-   }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Penjualan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
 
 
-   #app {
-     max-width: 800px;
-     margin: 0 auto;
-     padding: 20px;
-   }
+        #app {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
 
-   h1, h2 {
-     color: #333;
-   }
+        h1,
+        h2 {
+            color: #333;
+        }
 
 
-   table {
-     width: 100%;
-     border-collapse: collapse;
-     margin-top: 20px;
-   }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
 
 
-   th, td {
-     padding: 10px;
-     text-align: left;
-     border-bottom: 1px solid #ccc;
-   }
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ccc;
+        }
 
 
-   tr:hover {
-     background-color: #f9f9f9;
-   }
+        tr:hover {
+            background-color: #f9f9f9;
+        }
 
 
-   form {
-     margin-bottom: 20px;
-   }
+        form {
+            margin-bottom: 20px;
+        }
 
 
-   label {
-     display: block;
-     margin-bottom: 5px;
-   }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
 
 
-   input[type="text"],
-   input[type="number"],
-   input[type="date"] {
-     width: 100%;
-     padding: 5px;
-     margin-bottom: 10px;
-     border: 1px solid #ccc;
-     border-radius: 5px;
-   }
+        input[type="text"],
+        input[type="number"],
+        input[type="date"] {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
 
 
-   button {
-     background-color: #4CAF50;
-     color: white;
-     padding: 10px 20px;
-     border: none;
-     border-radius: 5px;
-     cursor: pointer;
-   }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
 
-   button:hover {
-     background-color: #45a049;
-   }
+        button:hover {
+            background-color: #45a049;
+        }
 
 
-   .message {
-     color: #ff5722;
-     font-weight: bold;
-   }
+        .message {
+            color: #ff5722;
+            font-weight: bold;
+        }
 
-  </style>
+    </style>
 </head>
 
 <body>
-  <div id="app">
-    <h1>Data Penjualan</h1>
-    <form action="{{ route('penjualan.store') }}" method="post">
-      @csrf
-      
-      <label for="nama_barang">Nama Barang</label>
-     <input type="text" name="nama_barang" required>
+    <div id="app">
+        <h1>Data Penjualan</h1>
+        <form action="{{ route('penjualan.store') }}" method="post">
+            @csrf
+
+            <label for="nama_barang">Nama Barang</label>
+            <input type="text" name="nama_barang" required>
 
 
-     <label for="stok">Stok</label>
-     <input type="number" name="stok" required>
+            <label for="stok">Stok</label>
+            <input type="number" name="stok" required>
 
 
-     <label for="jumlah_terjual">Jumlah Terjual</label>
-     <input type="number" name="jumlah_terjual" required>
+            <label for="jumlah_terjual">Jumlah Terjual</label>
+            <input type="number" name="jumlah_terjual" required>
 
 
-     <label for="tanggal_transaksi">Tanggal Transaksi</label>
-     <input type="date" name="tanggal_transaksi" required>
+            <label for="tanggal_transaksi">Tanggal Transaksi</label>
+            <input type="date" name="tanggal_transaksi" required>
 
 
-     <label for="jenis_barang">Jenis Barang</label>
-     <input type="text" name="jenis_barang" required>
+            <label for="jenis_barang">Jenis Barang</label>
+            <input type="text" name="jenis_barang" required>
 
 
-     <button type="submit">Tambahkan Transaksi</button>
-     <p v-if="message" class="message"></p>
-     
-    </form>
+            <button type="submit">Tambahkan Transaksi</button>
+            <p v-if="message" class="message"></p>
 
-    <div>
-      <label for="filter">Filter:</label>
-      <input type="text" name="filterText" @input="filterTransactions" id="filter" placeholder="Cari transaksi..."> 
-    </div>
+        </form>
 
-    <h2>Daftar Transaksi</h2>
-    <table>
-    
-      <tr>
-        <th >Nama Barang</th>
-        <th >Stok</th>
-        <th >Jumlah Terjual</th>
-        <th >Tanggal Transaksi</th>
-        <th >Jenis Barang</th>
+        <div>
+            <label for="filter">Filter:</label>
+            <input type="text" name="filterText" @input="filterTransactions" id="filter"
+                placeholder="Cari transaksi...">
+        </div>
+
+        <h2>Daftar Transaksi</h2>
+<table>
+    <tr>
+        <th>Nama Barang</th>
+        <th>Stok</th>
+        <th>Jumlah Terjual</th>
+        <th>Tanggal Transaksi</th>
+        <th>Jenis Barang</th>
         <th>Aksi</th>
-      </tr>
-      
-      @foreach($data as $items)
-      <tr>
-        <td>{{$items->nama_barang}}</td>
-        <td>{{$items->stok}}</td>
-        <td>{{$items->jumlah_terjual}}</td>
-        <td>{{$items->tanggal_transaksi}}</td>
-        <td>{{$items->jenis_barang}}</td>
-        
-      </tr>
-      @endforeach
-    </table>
-  </div>
-    </body>
+    </tr>
+    
+    @foreach($data as $item)
+    <tr>
+        <td>{{$item->nama_barang}}</td>
+        <td>{{$item->stok}}</td>
+        <td>{{$item->jumlah_terjual}}</td>
+        <td>{{$item->tanggal_transaksi}}</td>
+        <td>{{$item->jenis_barang}}</td>
+        <td>
+            <form action="{{ route('penjualan.destroy', $item->id) }}" method="post">
+                @csrf
+                @method('DELETE')
+                <button type="submit">Hapus</button>
+            </form>
+            <a href="{{ route('penjualan.edit', $item->id) }}">Edit</a>
+        </td>
+    </tr>
+    @endforeach
+</table>
+
+
+    </div>
+</body>
 
 </html>

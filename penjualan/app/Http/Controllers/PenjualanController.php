@@ -37,7 +37,6 @@ class PenjualanController extends Controller
      */
     public function store(Request $request)
 {
-    $data = Penjualan::all();
     $request->validate([
         'nama_barang' => 'required',
         'stok' => 'required|integer|min:0',
@@ -49,10 +48,7 @@ class PenjualanController extends Controller
     $data = Penjualan::create($request->all());
 
     if ($data) {
-        // Get the updated data after inserting the new record
-        $data = Penjualan::all();
-
-        return view('welcome', compact('data'))->with('success', 'Data transaksi berhasil ditambahkan.');
+        return redirect('/')->with('success', 'Data transaksi berhasil ditambahkan.');
     } else {
         return redirect('/penjualan')->with('error', 'Gagal menambahkan data transaksi.');
     }
@@ -81,7 +77,7 @@ class PenjualanController extends Controller
     return view('edit_penjualan', compact('penjualan'));
 }
 
-    public function update(Request $request, $id)
+public function update(Request $request, $id)
     {
         $penjualan = Penjualan::findOrFail($id);
 
@@ -99,13 +95,11 @@ class PenjualanController extends Controller
     }
 
     public function destroy($id)
-{
-    $penjualan = Penjualan::find($id);
-    if ($penjualan) {
+    {
+        $penjualan = Penjualan::findOrFail($id);
         $penjualan->delete();
+
         return redirect()->route('penjualan.index')->with('success', 'Data berhasil dihapus.');
-    } else {
-        return redirect()->route('penjualan.index')->with('error', 'Data tidak ditemukan.');
     }
 }
-}
+
