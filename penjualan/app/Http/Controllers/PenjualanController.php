@@ -72,15 +72,15 @@ class PenjualanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-{
-    $penjualan = Penjualan::find($id);
-    return view('edit_penjualan', compact('penjualan'));
-}
-
-public function update(Request $request, $id)
+    {
+        $penjualan = Penjualan::find($id);
+        return view('edit_penjualan', compact('penjualan'));
+    }
+    
+    public function update(Request $request, $id)
     {
         $penjualan = Penjualan::findOrFail($id);
-
+    
         $request->validate([
             'nama_barang' => 'required',
             'stok' => 'required|integer|min:0',
@@ -88,18 +88,26 @@ public function update(Request $request, $id)
             'tanggal_transaksi' => 'required|date',
             'jenis_barang' => 'required',
         ]);
-
+    
         $penjualan->update($request->all());
-
+    
         return redirect()->route('penjualan.index')->with('success', 'Data berhasil diupdate.');
     }
-
+    
     public function destroy($id)
     {
         $penjualan = Penjualan::findOrFail($id);
         $penjualan->delete();
-
+    
         return redirect()->route('penjualan.index')->with('success', 'Data berhasil dihapus.');
     }
+
+
+    
+
+  
+
 }
+
+
 
