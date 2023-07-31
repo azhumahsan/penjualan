@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Penjualan</title>
     <style>
-        /* Gaya tampilan CSS */
         body {
             font-family: Arial, sans-serif;
             background-color: #f2f2f2;
@@ -79,7 +78,6 @@
             font-weight: bold;
         }
 
-        /* Gaya untuk anchor "Edit" */
         a.edit-link {
             display: inline-block;
             background-color: #2196F3;
@@ -88,7 +86,7 @@
             border-radius: 5px;
             text-decoration: none;
             margin-right: 5px;
-            font-size:13px;
+            font-size: 13px;
         }
 
         a.edit-link:hover {
@@ -188,7 +186,6 @@
             const dataRows = rows.filter(row => row.style.display !== 'none');
             const sortedDataRows = sortRows(dataRows);
 
-            // Sisipkan kembali baris data yang sudah diurutkan
             table.innerHTML = '';
             table.appendChild(headerRow);
             sortedDataRows.forEach(row => table.appendChild(row));
@@ -200,7 +197,7 @@
             }
 
             return rows.sort((rowA, rowB) => {
-                const cellA = rowA.getElementsByTagName('td')[2]; // Kolom Jumlah Terjual
+                const cellA = rowA.getElementsByTagName('td')[2];
                 const cellB = rowB.getElementsByTagName('td')[2];
                 const valueA = parseInt(cellA.textContent || cellA.innerText, 10);
                 const valueB = parseInt(cellB.textContent || cellB.innerText, 10);
